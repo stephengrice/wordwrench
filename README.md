@@ -1,4 +1,6 @@
-# Word Wrench 
+# Word Wrench
+
+[![Build Status](https://travis-ci.com/stephengrice/wordwrench.svg?branch=master)](https://travis-ci.com/stephengrice/wordwrench)
 
 Welcome to Word Wrench.
 
