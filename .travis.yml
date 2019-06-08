@@ -7,7 +7,7 @@ install:
   - python wordwrench/manage.py migrate
 script:
   - python manage.py test
-  - python wordwrench/manage.py collectstatic --noinput --settings=wordwrench.settings.test
-  - coverage run --source=. wordwrench/manage.py test --noinput --settings=wordwrench.settings.test
+  - python wordwrench/manage.py collectstatic --noinput
+  - coverage run --source=. wordwrench/manage.py test --noinput
 after_success:
   - coveralls
