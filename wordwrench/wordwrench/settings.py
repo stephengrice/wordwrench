@@ -121,3 +121,9 @@ USE_TZ = True
 
 STATIC_ROOT = 'static'
 STATIC_URL = '/static/'
+
+# Deploy settings
+# Activate Django-Heroku.
+if 'HEROKU' in os.environ:
+    import django_heroku
+    django_heroku.settings(locals())

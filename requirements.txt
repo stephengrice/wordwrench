@@ -2,3 +2,4 @@ django
 coverage
 selenium
 python-coveralls
+django-heroku
