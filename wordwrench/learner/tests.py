@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-# Create your tests here.
 class LearnerTests(TestCase):
-    def test_nothing(self):
-        self.assertTrue(False, "Write some tests, ya nut!")
+    def test_index_template_used(self):
+        response = self.client.get('/')
+        self.assertTemplateUsed(response, "index.html")
