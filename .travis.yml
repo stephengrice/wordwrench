@@ -2,9 +2,17 @@ language: python
 dist: xenial
 python:
   - "3.5"
+addons:
+  chrome: stable
 install:
   - pip install -r requirements.txt
   - python wordwrench/manage.py migrate
+  - mkdir bin
+  - wget -P bin https://github.com/mozilla/geckodriver/releases/download/v0.24.0/geckodriver-v0.24.0-linux64.tar.gz
+  - tar xvf bin/geckodriver-v0.24.0-linux64.tar.gz -C bin
+  - rm bin/geckodriver-v0.24.0-linux64.tar.gz
+  - chmod +x bin/geckodriver
+  - PATH=$PWD/bin:$PATH
 script:
   - python wordwrench/manage.py test
   - python wordwrench/manage.py collectstatic --noinput
