@@ -8,9 +8,9 @@ install:
   - pip install -r requirements.txt
   - python wordwrench/manage.py migrate
   - mkdir bin
-  - wget -P bin https://chromedriver.storage.googleapis.com/75.0.3770.8/chromedriver_win32.zip
-  - unzip bin/chromedriver_win32.zip
-  - rm bin/chromedriver_win32.zip
+  - wget -P bin https://chromedriver.storage.googleapis.com/75.0.3770.8/chromedriver_linux64.zip
+  - unzip bin/chromedriver_linux64.zip -d bin
+  - rm bin/chromedriver_linux64.zip
   - chmod +x bin/chromedriver
   - PATH=$PWD/bin:$PATH
 script:

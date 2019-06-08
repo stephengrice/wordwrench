@@ -7,7 +7,11 @@ class NewUserTests(LiveServerTestCase):
     @classmethod
     def setUpClass(cls):
         super(NewUserTests, cls).setUpClass()
-        cls.selenium = webdriver.Chrome()
+        options = webdriver.ChromeOptions()
+        options.add_argument('headless')
+        options.add_argument('--no-sandbox')
+        options.add_argument('--disable-dev-shm-usage')
+        cls.selenium = webdriver.Chrome(chrome_options=options)
 
     def test_nothing(self):
         print('hello')
