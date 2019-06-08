@@ -1,6 +1,7 @@
 # Word Wrench
 
 [![Build Status](https://travis-ci.com/stephengrice/wordwrench.svg?branch=master)](https://travis-ci.com/stephengrice/wordwrench)
+[![Coverage Status](https://coveralls.io/repos/github/stephengrice/wordwrench/badge.svg?branch=master)](https://coveralls.io/github/stephengrice/wordwrench?branch=master)
 
 Welcome to Word Wrench.
 
