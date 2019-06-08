@@ -8,6 +8,6 @@ install:
 script:
   - python wordwrench/manage.py test
   - python wordwrench/manage.py collectstatic --noinput
-  - coverage run --source=. wordwrench/manage.py test --noinput
+  - coverage run --source=. --omit=wordwrench/manage.py wordwrench/manage.py test --noinput
 after_success:
   - coveralls
