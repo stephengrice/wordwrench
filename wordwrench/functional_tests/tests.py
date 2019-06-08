@@ -1,9 +1,9 @@
-from django.test import LiveServerTestCase
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 import time
 
-class NewUserTests(LiveServerTestCase):
+class NewUserTests(StaticLiveServerTestCase):
     @classmethod
     def setUpClass(cls):
         super(NewUserTests, cls).setUpClass()
@@ -11,9 +11,13 @@ class NewUserTests(LiveServerTestCase):
         options.add_argument('headless')
         options.add_argument('--no-sandbox')
         options.add_argument('--disable-dev-shm-usage')
-        cls.selenium = webdriver.Chrome(chrome_options=options)
-
-    def test_nothing(self):
-        print('hello')
-        time.sleep(3)
-        self.assertTrue(True)
+        cls.browser = webdriver.Chrome(chrome_options=options)
+    @classmethod
+    def tearDownClass(cls):
+        super(NewUserTests, cls).tearDownClass()
+        cls.browser.quit()
+    def testNewUser(self):
+        # John is a new user. He decides to visit WordWrench and see what all
+        # the hype is about.
+        self.browser.get(self.live_server_url)
+        self.assertIn('WordWrench', self.browser.title)
