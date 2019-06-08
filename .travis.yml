@@ -4,7 +4,10 @@ python:
   - "3.5"
 install:
   - pip install -r requirements.txt
-  - cd wordwrench
-  - python manage.py migrate
+  - python wordwrench/manage.py migrate
 script:
   - python manage.py test
+  - python wordwrench/manage.py collectstatic --noinput --settings=wordwrench.settings.test
+  - coverage run --source=. wordwrench/manage.py test --noinput --settings=wordwrench.settings.test
+after_success:
+  - coveralls
