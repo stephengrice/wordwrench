@@ -3,14 +3,13 @@ from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 import time
 
-class NewUserTest(LiveServerTestCase):
+class NewUserTests(LiveServerTestCase):
     @classmethod
     def setUpClass(cls):
-        super(NewUserTest, cls).setUpClass()
-        options = Options()
-        options.headless = True
-        cls.selenium = webdriver.Firefox(options=options)
+        super(NewUserTests, cls).setUpClass()
+        cls.selenium = webdriver.Chrome()
 
     def test_nothing(self):
+        print('hello')
         time.sleep(3)
         self.assertTrue(True)

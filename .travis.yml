@@ -8,14 +8,17 @@ install:
   - pip install -r requirements.txt
   - python wordwrench/manage.py migrate
   - mkdir bin
-  - wget -P bin https://github.com/mozilla/geckodriver/releases/download/v0.24.0/geckodriver-v0.24.0-linux64.tar.gz
-  - tar xvf bin/geckodriver-v0.24.0-linux64.tar.gz -C bin
-  - rm bin/geckodriver-v0.24.0-linux64.tar.gz
-  - chmod +x bin/geckodriver
+  - wget -P bin https://chromedriver.storage.googleapis.com/75.0.3770.8/chromedriver_win32.zip
+  - unzip bin/chromedriver_win32.zip
+  - rm bin/chromedriver_win32.zip
+  - chmod +x bin/chromedriver
   - PATH=$PWD/bin:$PATH
 script:
-  - python wordwrench/manage.py test
-  - python wordwrench/manage.py collectstatic --noinput
+  - cd wordwrench
+  - python manage.py test
+  - python manage.py test functional_tests
+  - python manage.py collectstatic --noinput
+  - cd ..
   - coverage run --source=. --omit=wordwrench/manage.py wordwrench/manage.py test --noinput
 after_success:
   - coveralls
