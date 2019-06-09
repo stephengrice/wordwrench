@@ -1,0 +1,25 @@
+{
+  "name": "wordwrench",
+  "version": "1.0.0",
+  "description": "Open source language learning platform",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "qunit wordwrench/static/js/test/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stephengrice/wordwrench.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stephengrice/wordwrench/issues"
+  },
+  "homepage": "https://github.com/stephengrice/wordwrench#readme",
+  "devDependencies": {
+    "qunit": "^2.9.2"
+  }
+}

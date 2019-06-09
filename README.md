@@ -11,7 +11,7 @@ Our mission is to build the most effective language-learning platform on the int
 
 Follow these steps to run the server locally, using the source in this repo.
 
-**Requirements:** Python 3.5, pip3, Google Chrome (to run functional tests), chromedriver (in PATH)
+**Requirements:** Python 3.5, pip3, Google Chrome and chromedriver (to run functional tests), Node JS / npm (for QUnit frontend tests)
 
 1. Clone the git repo.
 
@@ -24,6 +24,7 @@ git clone git@github.com:stephengrice/wordwrench.git
 ```bash
 cd wordwrench
 pip install -r requirements.txt
+npm install
 ```
 
 3. Run tests
@@ -35,6 +36,8 @@ cd wordwrench
 python manage.py test
 # Run functional tests
 python manage.py test functional_tests
+# Run JavaScript tests
+npm run test
 ```
 
 4. Run the local server. Go to localhost:8000 in your web browser to see it in action!
