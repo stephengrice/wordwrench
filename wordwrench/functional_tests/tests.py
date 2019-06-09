@@ -2,6 +2,10 @@ from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+import time
 
 class FunctionalTests(StaticLiveServerTestCase):
     @classmethod
@@ -30,6 +34,21 @@ class FunctionalTests(StaticLiveServerTestCase):
         # He/she is presented with a call to action - start learning!
         btn_start_learning = self.browser.find_element_by_id('btn_start_learning')
         self.assertIn('start learning', btn_start_learning.text.lower())
+        btn_start_learning.click()
+        # The languages page should now load
+        self.assertEquals(self.live_server_url + '/languages', self.browser.current_url)
+        # tries = 0 # time for an ugly explicit wait
+        # try:
+        #     while True:
+        #         if self.live_server_url + '/languages' == self.browser.current_url:
+        #             break
+        #         time.sleep(1)
+        #         tries += 1
+        #         if tries >= 10:
+        #             raise Exception('Out of time!')
+        # except Exception:
+        #     self.fail('Page not loaded')
+        
         # After clicking through, user can select a language
         # A list of languages is presented - Spanish, Russian, Japanese
         lst_languages = self.browser.find_element_by_id('lst_languages')
