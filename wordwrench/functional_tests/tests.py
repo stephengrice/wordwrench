@@ -37,31 +37,21 @@ class FunctionalTests(StaticLiveServerTestCase):
         btn_start_learning.click()
         # The languages page should now load
         self.assertEquals(self.live_server_url + '/languages', self.browser.current_url)
-        # tries = 0 # time for an ugly explicit wait
-        # try:
-        #     while True:
-        #         if self.live_server_url + '/languages' == self.browser.current_url:
-        #             break
-        #         time.sleep(1)
-        #         tries += 1
-        #         if tries >= 10:
-        #             raise Exception('Out of time!')
-        # except Exception:
-        #     self.fail('Page not loaded')
-        
         # After clicking through, user can select a language
         # A list of languages is presented - Spanish, Russian, Japanese
         lst_languages = self.browser.find_element_by_id('lst_languages')
         self.assertIn('Spanish', lst_languages.text)
         self.assertIn('Russian', lst_languages.text)
         self.assertIn('Japanese', lst_languages.text)
+        # User must select one before continuing.
+        btn_next = self.browser.find_element_by_id('btn_next')
+        self.assertTrue(btn_next.get_attribute('disabled'))
         # User chooses Spanish
         btn_spanish = self.browser.find_element_by_css_selector('#lst_languages label[for="spanish"]')
         btn_spanish.click()
-        radio_spanish = self.browser.find_element_by_css_selector('#lst_languages input[type=radio][name="spanish"]')
+        radio_spanish = self.browser.find_element_by_css_selector('#lst_languages input[type=radio][id="spanish"]')
         self.assertTrue(radio_spanish.is_selected())
         # User clicks next
-        btn_next = self.browser.find_element_by_id('btn_next')
         btn_next.click()
         # User is directed to Spanish lessons home page.
         lbl_language = self.browser.find_element_by_id('lbl_language')
