@@ -3,3 +3,4 @@ coverage
 selenium
 python-coveralls
 django-heroku
+gunicorn
