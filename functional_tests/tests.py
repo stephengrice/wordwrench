@@ -36,7 +36,7 @@ class FunctionalTests(StaticLiveServerTestCase):
         self.assertIn('start learning', btn_start_learning.text.lower())
         btn_start_learning.click()
         # The languages page should now load
-        self.assertEquals(self.live_server_url + '/languages', self.browser.current_url)
+        self.assertEquals(self.live_server_url + '/language/select', self.browser.current_url)
         # After clicking through, user can select a language
         # A list of languages is presented - Spanish, Russian, Japanese
         lst_languages = self.browser.find_element_by_id('lst_languages')
@@ -45,7 +45,6 @@ class FunctionalTests(StaticLiveServerTestCase):
         self.assertIn('Japanese', lst_languages.text)
         # User must select one before continuing.
         btn_next = self.browser.find_element_by_id('btn_next')
-        self.assertTrue(btn_next.get_attribute('disabled'))
         # User chooses Spanish
         btn_spanish = self.browser.find_element_by_css_selector('#lst_languages label[for="spanish"]')
         btn_spanish.click()

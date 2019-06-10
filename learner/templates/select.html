@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+Languages
+<form id="lst_languages" name="lst_languages" method="POST">
+  {% csrf_token %}
+  <label for="spanish">
+    <input type="radio" name="language" value="spanish" id="spanish" /> Spanish
+  </label>
+  <label for="russian">
+    <input type="radio" name="language" value="russian" id="russian" /> Russian
+  </label>
+  <label for="japanese">
+    <input type="radio" name="language" value="japanese" id="japanese" /> Japanese
+  </label>
+  <button type="submit" id="btn_next">Next</button>
+</form>
+{% endblock %}
