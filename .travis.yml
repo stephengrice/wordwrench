@@ -13,12 +13,10 @@ install:
   - rm bin/chromedriver_linux64.zip
   - chmod +x bin/chromedriver
   - PATH=$PWD/bin:$PATH
-  - npm install
 script:
   - cd wordwrench
   - python manage.py test
   - python manage.py test functional_tests
-  - npm run test
   - python manage.py collectstatic --noinput
   - cd ..
   - coverage run --source=. --omit=wordwrench/manage.py wordwrench/manage.py test --noinput
