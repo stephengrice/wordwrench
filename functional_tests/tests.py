@@ -21,13 +21,13 @@ class FunctionalTests(StaticLiveServerTestCase):
     def tearDownClass(cls):
         super(FunctionalTests, cls).tearDownClass()
         cls.browser.quit()
-    def testNewUser(self):
+    def test_new_user(self):
         # John is a new user. He decides to visit WordWrench and see what all
         # the hype is about.
         self.browser.get(self.live_server_url)
         self.assertIn('WordWrench', self.browser.title)
         # TODO finish this to include sign-up flow
-    def testMVP(self):
+    def test_mvp(self):
         # Minimum viable product for this app:
         # A user logs onto the website
         self.browser.get(self.live_server_url)
@@ -54,7 +54,6 @@ class FunctionalTests(StaticLiveServerTestCase):
         # User clicks next
         btn_next.click()
         # User is directed to Spanish lessons home page.
-    def restoftest(self): # So the test doesn't fail, for now
         lbl_language = self.browser.find_element_by_id('lbl_language')
         self.assertEquals('Spanish', lbl_language.text)
         # A short list of topics are available (at least 3)

@@ -15,7 +15,6 @@ install:
   - PATH=$PWD/bin:$PATH
 script:
   - python manage.py test
-  - python manage.py test functional_tests
   - python manage.py collectstatic --noinput
   - coverage run --source=. --omit=manage.py manage.py test --noinput
 after_success:

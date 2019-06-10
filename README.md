@@ -24,20 +24,12 @@ git clone git@github.com:stephengrice/wordwrench.git
 ```bash
 cd wordwrench
 pip install -r requirements.txt
-npm install
 ```
 
 3. Run tests
 
 ```bash
-# Make sure you're in the directory with manage.py
-cd wordwrench
-# Run unit tests
 python manage.py test
-# Run functional tests
-python manage.py test functional_tests
-# Run JavaScript tests
-npm run test
 ```
 
 4. Run the local server. Go to localhost:8000 in your web browser to see it in action!
@@ -49,8 +41,5 @@ python manage.py runserver
 5. Try out the production server (requires Heroku CLI)
 
 ```bash
-# Return to root of repo (with README, .git, etc.)
-cd ..
-# Run the Heroku web process locally
 heroku local web
 ```
