@@ -6,7 +6,7 @@ addons:
   chrome: stable
 install:
   - pip install -r requirements.txt
-  - python wordwrench/manage.py migrate
+  - python manage.py migrate
   - mkdir bin
   - wget -P bin https://chromedriver.storage.googleapis.com/75.0.3770.8/chromedriver_linux64.zip
   - unzip bin/chromedriver_linux64.zip -d bin
@@ -14,11 +14,9 @@ install:
   - chmod +x bin/chromedriver
   - PATH=$PWD/bin:$PATH
 script:
-  - cd wordwrench
   - python manage.py test
   - python manage.py test functional_tests
   - python manage.py collectstatic --noinput
-  - cd ..
-  - coverage run --source=. --omit=wordwrench/manage.py wordwrench/manage.py test --noinput
+  - coverage run --source=. --omit=manage.py manage.py test --noinput
 after_success:
   - coveralls
