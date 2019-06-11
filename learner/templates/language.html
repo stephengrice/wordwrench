@@ -1,5 +1,21 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div id="lbl_language">Hello</div>
+<div id="lbl_language">{{ language | title }}</div>
+
+<div id="lst_topics">
+  <div class="topic">
+    Lorem ipsum dolor.
+    <a id="btn_start" class="button" href="{% url 'language-topic' language=language topic='sample' %}">Start Learning</a>
+  </div>
+  <div class="topic">
+    Quas atque, dolorem.
+    <button id="btn_start">Start Learning</button>
+  </div>
+  <div class="topic">
+    Necessitatibus, dicta. Rerum!
+    <button id="btn_start">Start Learning</button>
+  </div>
+</div>
+
 {% endblock %}

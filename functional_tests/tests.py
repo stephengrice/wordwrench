@@ -5,6 +5,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.action_chains import ActionChains
 import time
 
 class FunctionalTests(StaticLiveServerTestCase):
@@ -64,12 +65,14 @@ class FunctionalTests(StaticLiveServerTestCase):
         btn_topic.click()
         # User is sent to dynamic learning page for that topic
         # A progress bar is shown at the top
-        progress_bar = self.browser.find_element_by_id('progress_bar')
+        progress_bar = self.browser.find_element_by_id('progress-bar')
         # A short sentence is presented in the target language (Spanish) - "Hola"
         lbl_prompt = self.browser.find_element_by_id('lbl_prompt')
         self.assertEquals('Hola', lbl_prompt.text)
-        # The user can hover over the foreign language word to see the translation
-        self.browser.move_to_element(lbl_prompt)
+        # The user hover over the new word to see what it means
+        actions = ActionChains(self.browser)
+        actions.move_to_element(lbl_prompt).perform()
+        # The translation is displayed when hovered
         lbl_translation = self.browser.find_element_by_id('lbl_translation')
         self.assertTrue(lbl_translation.is_displayed())
         # A text box is shown where the user can type in an answer
@@ -84,7 +87,7 @@ class FunctionalTests(StaticLiveServerTestCase):
         self.assertIn('correct', lbl_grade.text.lower())
 
         # Progress bar indicates 50%
-        progress_bar = self.browser.find_element_by_id('progress_bar')
+        progress_bar = self.browser.find_element_by_id('progress-bar')
         self.assertEquals("50%", progress_bar.get_attribute('data-progress'))
         # User presses enter to advance.
         btn_next = self.browser.find_element_by_id('btn_next')
@@ -104,7 +107,7 @@ class FunctionalTests(StaticLiveServerTestCase):
         # The wrong answer is presented again at some point
         # TODO -------------------------------------- DRY this section up
         # Progress bar indicates 50%
-        progress_bar = self.browser.find_element_by_id('progress_bar')
+        progress_bar = self.browser.find_element_by_id('progress-bar')
         self.assertEquals("50%", progress_bar.get_attribute('data-progress'))
         # User presses enter to advance.
         btn_next = self.browser.find_element_by_id('btn_next')

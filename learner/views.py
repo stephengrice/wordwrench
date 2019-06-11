@@ -11,4 +11,7 @@ def select(request):
     return render(request, 'select.html')
 
 def language(request, language):
-    return render(request, 'language.html')
+    return render(request, 'language.html', {'language' : language})
+
+def topic(request, language, topic):
+    return render(request, 'topic.html', {'language': language, 'topic' : topic})

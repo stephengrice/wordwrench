@@ -13,3 +13,8 @@ class LearnerTests(TestCase):
     def test_languages_post_redirects_russian(self):
         response = self.client.post('/language/select', {'language': 'russian'})
         self.assertRedirects(response, '/language/russian')
+    def test_languages_topic_shows(self):
+        response = self.client.get('/language/spanish/greetings')
+        self.assertTemplateUsed(response, 'topic.html')
+        self.assertIn('spanish', response.content.decode(response.charset).lower())
+        self.assertIn('greetings', response.content.decode(response.charset).lower())
