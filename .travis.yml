@@ -13,8 +13,10 @@ install:
   - rm bin/chromedriver_linux64.zip
   - chmod +x bin/chromedriver
   - PATH=$PWD/bin:$PATH
+  - npm install
 script:
   - python manage.py test
+  - npm run test
   - python manage.py collectstatic --noinput
   - coverage run --source=. --omit=manage.py manage.py test --noinput
 after_success:
