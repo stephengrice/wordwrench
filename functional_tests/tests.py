@@ -65,7 +65,7 @@ class FunctionalTests(StaticLiveServerTestCase):
         btn_topic.click()
         # User is sent to dynamic learning page for that topic
         # A progress bar is shown at the top
-        progress_bar = self.browser.find_element_by_id('progress-bar')
+        progress_bar = self.browser.find_element_by_id('progress_bar')
         # A short sentence is presented in the target language (Spanish) - "Hola"
         lbl_prompt = self.browser.find_element_by_id('lbl_prompt')
         self.assertEquals('Hola', lbl_prompt.text)
@@ -87,8 +87,8 @@ class FunctionalTests(StaticLiveServerTestCase):
         self.assertIn('correct', lbl_grade.text.lower())
 
         # Progress bar indicates 50%
-        progress_bar = self.browser.find_element_by_id('progress-bar')
-        self.assertEquals("50%", progress_bar.get_attribute('data-progress'))
+        progress_bar = self.browser.find_element_by_id('progress_bar')
+        self.assertEquals("50%", progress_bar.value_of_css_property('width'))
         # User presses enter to advance.
         btn_next = self.browser.find_element_by_id('btn_next')
         btn_next.click()
