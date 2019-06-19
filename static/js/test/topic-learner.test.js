@@ -51,6 +51,14 @@ describe('Topic Learner', () => {
   it('has a btn_next', () => {
     assertHasElement(learner, 'btn_next');
   });
+  it('has a percentage with default of 0.0', () => {
+    assert.equal(learner.percentage, 0.0);
+  });
+  it('sets progressbar solid when percentage is changed', () => {
+    assert.equal(learner.progress_bar.find('#solid').css('width'), learner.percentage + "%");
+    learner.setPercentage(0.5);
+    assert.equal(learner.progress_bar.find('#solid').css('width'), (learner.percentage * 100) + "%");
+  })
 });
 
 function assertHasElement(learner, element_id) {
