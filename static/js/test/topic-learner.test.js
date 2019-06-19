@@ -1,26 +1,60 @@
 const assert = require('assert');
 const sinon = require('sinon');
 const jsdom = require('jsdom');
-const $ = require('jquery')(new jsdom.JSDOM(`<!DOCTYPE html><html></html>`).window);
+const $ = require('jquery')(new jsdom.JSDOM(`
+  <!DOCTYPE html>
+  <html>
+  <body>
+    <div id="learner"></div>
+  </body>
+  </html>
+`).window);
 
 const TopicLearner = require('../topic-learner');
 
 describe('Topic Learner', () => {
+  var learner;
   beforeEach(function() {
-    var ajaxStub = sinon.stub($, 'ajax');
-    ajaxStub.yieldsTo('success', 'hey');
-    sinon.stub($, 'ajax').withArgs('http://www.google.com').returns({
-      done: (callback) => {
-        callback('hey');
-      }
-    });
+    learner = new TopicLearner($('#learner'));
   });
-  afterEach(function() {
-    $.ajax.restore();
+  it('throws an error without an element argument', () => {
+    assert.throws(() => {
+      let learner = new TopicLearner();
+    }, Error);
   });
-  it('stubs ajax method', () => {
-    let val = $.ajax('http://www.google.com').done(function(data) {
-      assert.equal(data, 'hey');
-    });
+  it('instantiates successfully with an element argument', () => {
+    let mlearner = new TopicLearner($('#learner'));
+  });
+  it('sets element field to the one passed in constructor', () => {
+    assert.equal(learner.element.attr('id'), $('#learner').attr('id'));
+  });
+  it('throws an error when element is not found', () => {
+    assert.throws(() => {
+      let mlearner = new TopicLearner($('#not-an-element'));
+    }, Error);
+  });
+  it('has a progress_bar', () => {
+    assertHasElement(learner, 'progress_bar');
+  });
+  it('has a lbl_translation', () => {
+    assertHasElement(learner, 'lbl_translation');
+  });
+  it('has a lbl_prompt', () => {
+    assertHasElement(learner, 'lbl_prompt');
+  });
+  it('has a txt_answer', () => {
+    assertHasElement(learner, 'txt_answer');
+  });
+  it('has a lbl_grade', () => {
+    assertHasElement(learner, 'lbl_grade');
+  });
+  it('has a btn_next', () => {
+    assertHasElement(learner, 'btn_next');
   });
 });
+
+function assertHasElement(learner, element_id) {
+  assert.notEqual(learner[element_id], undefined, `Element ${element_id} is undefined`);
+  assert.equal(learner[element_id].attr('id'), $(`#learner #${element_id}`).attr('id'));
+  assert.equal(learner[element_id].length, 1);
+}
