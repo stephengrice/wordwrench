@@ -30,6 +30,8 @@ var TopicLearner = (function() {
     // Fields
     this.language = language;
     this.topic = topic;
+    this.topic_data = null;
+    this.loaded = false;
     this.setPercentage(0.0);
   };
 
@@ -41,6 +43,10 @@ var TopicLearner = (function() {
     this.progress_bar.find('#solid').css('width', (percentage * 100) + '%');
     this.percentage = percentage
   }
+
+  TopicLearner.prototype.load = function() {
+    $.ajax('/api/topic');
+  };
 
   return TopicLearner;
 })();

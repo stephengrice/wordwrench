@@ -9,13 +9,23 @@ const $ = require('jquery')(new jsdom.JSDOM(`
   </body>
   </html>
 `).window);
+global.$ = $;
 
 const TopicLearner = require('../topic-learner');
 
 describe('Topic Learner', () => {
   var learner;
+  var server;
   beforeEach(function() {
     learner = new TopicLearner($('#learner'), 'spanish', 'sample');
+
+    server = sinon.fakeServer.create();
+    // stubAjax = sinon.stub($, 'ajax').returns();
+    // stubAjax.yieldsTo('success', 'hi');
+    // sinon.replace($, 'ajax', sinon.fake());
+  });
+  afterEach(function() {
+    server.restore();
   });
   it('throws an error with less than three arguments', () => {
     assert.throws(() => {
@@ -66,6 +76,15 @@ describe('Topic Learner', () => {
     assert.equal(learner.progress_bar.find('#solid').css('width'), learner.percentage + "%");
     learner.setPercentage(0.5);
     assert.equal(learner.progress_bar.find('#solid').css('width'), (learner.percentage * 100) + "%");
+  });
+  it('has topic and topic_loaded fields with initial values', () => {
+    assert.equal(learner.topic_data, null);
+    assert.equal(learner.loaded, false);
+  });
+  it('sends ajax request when load() is called', () => {
+    let spy = sinon.stub($, 'ajax');
+    learner.load();
+    assert($.ajax.calledOnce);
   });
 });
 
