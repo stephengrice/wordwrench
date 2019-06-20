@@ -45,7 +45,13 @@ var TopicLearner = (function() {
   }
 
   TopicLearner.prototype.load = function() {
-    $.ajax('/api/topic');
+    $.ajax(
+      '/api/topic'
+    ).done(function(data) {
+      console.log('all done');
+    }).fail(function(error) {
+      throw new Error('Failed to get data: ' + error);
+    });
   };
 
   return TopicLearner;

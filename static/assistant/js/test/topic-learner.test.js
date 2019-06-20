@@ -81,11 +81,27 @@ describe('Topic Learner', () => {
     assert.equal(learner.topic_data, null);
     assert.equal(learner.loaded, false);
   });
-  it('sends ajax request when load() is called', () => {
-    let spy = sinon.stub($, 'ajax');
-    learner.load();
-    assert($.ajax.calledOnce);
-  });
+  // it('sends ajax request when load() is called', () => {
+  //   let spy = sinon.stub($, 'ajax');
+  //   learner.load();
+  //   assert($.ajax.calledOnce);
+  // });
+  it('throws an error if ajax not successful', () => {
+    let returnObject = {
+      done: (callback) => {
+        return returnObject;
+      },
+      fail: (callback) => {
+        callback('404 error');
+        return returnObject;
+      }
+    };
+    sinon.replace($, 'ajax', sinon.fake.returns(returnObject));
+
+    assert.throws(() => {
+      learner.load();
+    });
+  })
 });
 
 function assertHasElement(learner, element_id) {
