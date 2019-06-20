@@ -1,7 +1,15 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 
 {% block content %}
 
 <div id="learner"></div>
 
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'assistant/js/topic-learner.js' %}"></script>
+<script>
+  new TopicLearner($('#learner'), '{{ language }}', '{{ topic }}');
+</script>
 {% endblock %}

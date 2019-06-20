@@ -15,18 +15,26 @@ const TopicLearner = require('../topic-learner');
 describe('Topic Learner', () => {
   var learner;
   beforeEach(function() {
-    learner = new TopicLearner($('#learner'));
+    learner = new TopicLearner($('#learner'), 'spanish', 'sample');
   });
-  it('throws an error without an element argument', () => {
+  it('throws an error with less than three arguments', () => {
     assert.throws(() => {
       let learner = new TopicLearner();
     }, Error);
+    assert.throws(() => {
+      let learner = new TopicLearner($('#learner'));
+    }, Error);
+    assert.throws(() => {
+      let learner = new TopicLearner($('#learner'), 'not a lang');
+    }, Error);
   });
-  it('instantiates successfully with an element argument', () => {
-    let mlearner = new TopicLearner($('#learner'));
+  it('instantiates successfully with element, language, and topic arguments', () => {
+    let mlearner = new TopicLearner($('#learner'), 'spanish', 'sample');
   });
-  it('sets element field to the one passed in constructor', () => {
+  it('sets elements, language, and topic fields to the ones passed in constructor', () => {
     assert.equal(learner.element.attr('id'), $('#learner').attr('id'));
+    assert.equal(learner.language, 'spanish');
+    assert.equal(learner.topic, 'sample');
   });
   it('throws an error when element is not found', () => {
     assert.throws(() => {
@@ -58,7 +66,7 @@ describe('Topic Learner', () => {
     assert.equal(learner.progress_bar.find('#solid').css('width'), learner.percentage + "%");
     learner.setPercentage(0.5);
     assert.equal(learner.progress_bar.find('#solid').css('width'), (learner.percentage * 100) + "%");
-  })
+  });
 });
 
 function assertHasElement(learner, element_id) {
