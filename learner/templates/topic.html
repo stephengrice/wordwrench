@@ -10,6 +10,10 @@
 {% block scripts %}
 <script src="{% static 'assistant/js/topic-learner.js' %}"></script>
 <script>
-  new TopicLearner($('#learner'), '{{ language }}', '{{ topic }}');
+  new TopicLearner({
+    element: $('#learner'),
+    language: '{{ language }}',
+    topic: '{{ topic }}'
+  });
 </script>
 {% endblock %}
