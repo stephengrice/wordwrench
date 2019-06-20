@@ -6,7 +6,7 @@ var INNER_HTML = ' \
 <div id="lbl_translation"></div> \
 <input id="txt_answer" /> \
 <div id="lbl_grade"></div> \
-<button id="btn_next"></button> \
+<button id="btn_next">Next</button> \
 ';
 
 var TopicLearner = (function() {

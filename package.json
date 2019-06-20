@@ -7,7 +7,7 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "mocha static/js/test"
+    "test": "mocha static/assistant/js/test"
   },
   "repository": {
     "type": "git",
