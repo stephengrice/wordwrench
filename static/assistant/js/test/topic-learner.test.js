@@ -81,11 +81,18 @@ describe('Topic Learner', () => {
     assert.equal(learner.topic_data, null);
     assert.equal(learner.loaded, false);
   });
-  // it('sends ajax request when load() is called', () => {
-  //   let spy = sinon.stub($, 'ajax');
-  //   learner.load();
-  //   assert($.ajax.calledOnce);
-  // });
+  it('sends ajax request when load() is called', () => {
+    var returnObject = {
+      done: () => {return returnObject},
+      fail: () => {}
+    };
+    sinon.replace($, 'ajax', sinon.fake.returns(returnObject));
+
+    learner.load();
+    assert($.ajax.calledOnce);
+
+    sinon.restore();
+  });
   it('throws an error if ajax not successful', () => {
     let returnObject = {
       done: (callback) => {
@@ -101,6 +108,8 @@ describe('Topic Learner', () => {
     assert.throws(() => {
       learner.load();
     });
+
+    sinon.restore();
   })
 });
 
